@@ -65,8 +65,6 @@ def generate_boards(b: int):
                 if board.get_whites(i) + board.get_blacks(i) != 3:
                     good = False
                     break
-            if board.white_sum != 9 or board.black_sum != 9:
-                good = False
             if good:
                 yield board
             return
@@ -77,7 +75,7 @@ def generate_boards(b: int):
                 continue
             board.increment_at(1, row_i, black)
             for black2 in range(b):
-                if black2 == black:
+                if black2 <= black:
                     continue
                 if board.m[black2][row_i] == 1:
                     continue
@@ -95,5 +93,5 @@ def generate_boards(b: int):
         yield _board
 
 
-for board in generate_boards(12):
+for board in generate_boards(8):
     stdout.write(str(board.m) + "\n")
